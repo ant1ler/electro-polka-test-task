@@ -1,0 +1,359 @@
+[
+  {
+    "order_id": "TD-48190",
+    "customer": "Наталья Белова",
+    "email": "n.belova@mail.example",
+    "items": [
+      {
+        "name": "Электрический чайник Kettle Pro",
+        "qty": 1,
+        "price": 3490
+      }
+    ],
+    "total": 3490,
+    "created_at": "2026-07-25",
+    "status": "delivered",
+    "expected_delivery": "2026-07-28",
+    "delivered_at": "2026-08-02"
+  },
+  {
+    "order_id": "TD-48201",
+    "customer": "Семён Карпов",
+    "email": "karpov.s@mail.example",
+    "items": [
+      {
+        "name": "Стиральная машина AquaWash 7",
+        "qty": 1,
+        "price": 38990
+      }
+    ],
+    "total": 38990,
+    "created_at": "2026-10-03",
+    "status": "delivered",
+    "expected_delivery": "2026-10-08",
+    "delivered_at": "2026-10-08"
+  },
+  {
+    "order_id": "TD-48213",
+    "customer": "Андрей Ковалёв",
+    "email": "a.kovalev@mail.example",
+    "items": [
+      {
+        "name": "Фен Aero Style",
+        "qty": 1,
+        "price": 6990
+      },
+      {
+        "name": "Электрическая зубная щётка CleanSonic",
+        "qty": 1,
+        "price": 4590
+      }
+    ],
+    "total": 11580,
+    "created_at": "2026-09-28",
+    "status": "shipped",
+    "expected_delivery": "2026-10-03",
+    "delivered_at": null,
+    "tracking": {
+      "carrier": "СДЭК",
+      "last_update": "2026-10-04",
+      "last_event": "Принято на сортировочном центре"
+    }
+  },
+  {
+    "order_id": "TD-48222",
+    "customer": "Валерия Зуева",
+    "email": "zueva.v@mail.example",
+    "items": [
+      {
+        "name": "Робот-пылесос CleanBot S5",
+        "qty": 1,
+        "price": 24990
+      }
+    ],
+    "total": 24990,
+    "created_at": "2026-09-17",
+    "status": "cancelled",
+    "expected_delivery": null,
+    "delivered_at": null,
+    "cancelled_at": "2026-09-20",
+    "refund": {
+      "amount": 24990,
+      "status": "processing",
+      "initiated_at": "2026-09-20"
+    }
+  },
+  {
+    "order_id": "TD-48225",
+    "customer": "ООО «Северный ветер»",
+    "email": "buh@sev-veter.example",
+    "customer_type": "legal",
+    "items": [
+      {
+        "name": "Монитор ViewMax 27\"",
+        "qty": 3,
+        "price": 21990
+      }
+    ],
+    "total": 65970,
+    "created_at": "2026-09-19",
+    "status": "delivered",
+    "expected_delivery": "2026-09-25",
+    "delivered_at": "2026-09-25"
+  },
+  {
+    "order_id": "TD-48227",
+    "customer": "Наталья Белова",
+    "email": "n.belova@mail.example",
+    "items": [
+      {
+        "name": "Умные часы Pulse Fit 3",
+        "qty": 1,
+        "price": 14990
+      }
+    ],
+    "total": 14990,
+    "created_at": "2026-09-10",
+    "status": "delivered",
+    "expected_delivery": "2026-09-15",
+    "delivered_at": "2026-09-15"
+  },
+  {
+    "order_id": "TD-48230",
+    "customer": "Ольга Миронова",
+    "email": "o.mironova@mail.example",
+    "items": [
+      {
+        "name": "Блендер MixMaster 900",
+        "qty": 1,
+        "price": 12490
+      }
+    ],
+    "total": 12490,
+    "created_at": "2026-10-02",
+    "status": "delivered",
+    "expected_delivery": "2026-10-05",
+    "delivered_at": "2026-10-05",
+    "payment": {
+      "method": "card",
+      "status": "captured"
+    }
+  },
+  {
+    "order_id": "TD-48233",
+    "customer": "Mark Davies",
+    "email": "mark.davies@mail.example",
+    "items": [
+      {
+        "name": "Ноутбук ProBook 14",
+        "qty": 1,
+        "price": 89990
+      }
+    ],
+    "total": 89990,
+    "created_at": "2026-10-06",
+    "status": "delivered",
+    "expected_delivery": "2026-10-11",
+    "delivered_at": "2026-10-11"
+  },
+  {
+    "order_id": "TD-48236",
+    "customer": "Павел Новиков",
+    "email": "novikov.p@mail.example",
+    "items": [
+      {
+        "name": "Игровая мышь Strike X",
+        "qty": 1,
+        "price": 4990
+      }
+    ],
+    "total": 4990,
+    "created_at": "2026-09-30",
+    "status": "shipped",
+    "expected_delivery": "2026-10-05",
+    "delivered_at": null,
+    "tracking": {
+      "carrier": "Почта России",
+      "last_update": "2026-10-03",
+      "last_event": "Покинуло сортировочный центр"
+    }
+  },
+  {
+    "order_id": "TD-48238",
+    "customer": "Павел Новиков",
+    "email": "novikov.p@mail.example",
+    "items": [
+      {
+        "name": "Коврик для мыши XL",
+        "qty": 1,
+        "price": 1490
+      }
+    ],
+    "total": 1490,
+    "created_at": "2026-10-01",
+    "status": "shipped",
+    "expected_delivery": "2026-10-06",
+    "delivered_at": null,
+    "tracking": {
+      "carrier": "Почта России",
+      "last_update": "2026-10-03",
+      "last_event": "Покинуло сортировочный центр"
+    }
+  },
+  {
+    "order_id": "TD-48240",
+    "customer": "Анна Руденко",
+    "email": "rudenko.a@mail.example",
+    "items": [
+      {
+        "name": "Микроволновая печь Wave 20",
+        "qty": 1,
+        "price": 8990
+      }
+    ],
+    "total": 8990,
+    "created_at": "2026-10-07",
+    "status": "shipped",
+    "expected_delivery": "2026-10-11",
+    "delivered_at": null,
+    "delivery_slot": "2026-10-11 10:00–14:00",
+    "tracking": {
+      "carrier": "Курьер магазина",
+      "last_update": "2026-10-11",
+      "last_event": "Доставка не выполнена"
+    }
+  },
+  {
+    "order_id": "TD-48241",
+    "customer": "Марина Котова",
+    "email": "kotova.m@mail.example",
+    "items": [
+      {
+        "name": "Пароварка SteamChef",
+        "qty": 1,
+        "price": 5490
+      }
+    ],
+    "total": 5490,
+    "created_at": "2026-10-10",
+    "status": "processing",
+    "expected_delivery": "2026-10-15",
+    "delivered_at": null
+  },
+  {
+    "order_id": "TD-48244",
+    "customer": "Тимур Ахмедов",
+    "email": "t.akhmedov@mail.example",
+    "items": [
+      {
+        "name": "Смартфон Nova 12",
+        "qty": 1,
+        "price": 54990
+      }
+    ],
+    "total": 54990,
+    "created_at": "2026-10-11",
+    "status": "payment_pending",
+    "expected_delivery": "2026-10-16",
+    "delivered_at": null,
+    "payment": {
+      "method": "sbp",
+      "status": "pending",
+      "reserve_until": "2026-10-13"
+    }
+  },
+  {
+    "order_id": "TD-48246",
+    "customer": "Sophie Klein",
+    "email": "sophie.klein@mail.example",
+    "items": [
+      {
+        "name": "Электросамокат Urban 2",
+        "qty": 1,
+        "price": 32990
+      }
+    ],
+    "total": 32990,
+    "created_at": "2026-10-09",
+    "status": "shipped",
+    "expected_delivery": "2026-10-14",
+    "delivered_at": null
+  },
+  {
+    "order_id": "TD-48248",
+    "customer": "Виктор Сомов",
+    "email": "somov.v@mail.example",
+    "items": [
+      {
+        "name": "Телевизор Vision 55",
+        "qty": 1,
+        "price": 47990
+      }
+    ],
+    "total": 47990,
+    "created_at": "2026-09-24",
+    "status": "shipped",
+    "expected_delivery": "2026-09-30",
+    "delivered_at": null,
+    "tracking": {
+      "carrier": "Деловые линии",
+      "last_update": "2026-09-29",
+      "last_event": "Груз принят к перевозке"
+    }
+  },
+  {
+    "order_id": "TD-48250",
+    "customer": "Кирилл Фомин",
+    "email": "fomin.k@mail.example",
+    "items": [
+      {
+        "name": "Игровая консоль Arcadia One",
+        "qty": 1,
+        "price": 49990
+      }
+    ],
+    "total": 49990,
+    "created_at": "2026-10-11",
+    "status": "processing",
+    "expected_delivery": "2026-10-16",
+    "delivered_at": null
+  },
+  {
+    "order_id": "TD-48252",
+    "customer": "Дарья Ершова",
+    "email": "ershova.d@mail.example",
+    "items": [
+      {
+        "name": "Беспроводные наушники AirLite",
+        "qty": 1,
+        "price": 7990
+      }
+    ],
+    "total": 7990,
+    "created_at": "2026-09-27",
+    "status": "delivered",
+    "expected_delivery": "2026-10-01",
+    "delivered_at": "2026-10-01",
+    "bonus": {
+      "expected": 500,
+      "credited": 0
+    }
+  },
+  {
+    "order_id": "TD-48219",
+    "customer": "Игорь Лебедев",
+    "email": "lebedev.i@mail.example",
+    "items": [
+      {
+        "name": "Наушники SoundBeat Pro",
+        "qty": 1,
+        "price": 11990
+      }
+    ],
+    "total": 11990,
+    "created_at": "2026-09-23",
+    "status": "delivered",
+    "expected_delivery": "2026-09-28",
+    "delivered_at": "2026-09-28"
+  }
+]

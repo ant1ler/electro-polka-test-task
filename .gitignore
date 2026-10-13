@@ -1,0 +1,19 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Секреты
+.env
+
+# Результаты
+output/
+cache.json
+
+# Вспомогательные файлы
+check_encodings.py
+test_gigachat.py
