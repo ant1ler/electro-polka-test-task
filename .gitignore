@@ -17,3 +17,6 @@ cache.json
 # Вспомогательные файлы
 check_encodings.py
 test_gigachat.py
+
+# Pytest cache
+.pytest_cache/

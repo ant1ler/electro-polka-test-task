@@ -40,5 +40,3 @@ def read_all(inbox_path = 'data/inbox'):
 if __name__ == "__main__":
     emails = read_all()
     print(f"Найдено писем: {len(emails)}")
-    for e in emails[:15]:
-        print(f"{e['filename']}: {e['text'][:50]}...")
