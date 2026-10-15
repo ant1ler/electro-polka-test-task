@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from langchain_gigachat.chat_models import GigaChat
 from langchain_core.messages import HumanMessage
 from src.config import CURRENT_DATE
@@ -7,6 +8,7 @@ from datetime import datetime, timedelta
 
 from src.config import (
     GIGACHAT_CREDENTIALS,
+    GIGACHAT_TIMEOUT,
     GIGACHAT_MODEL,
     GIGACHAT_SCOPE,
     VERIFY_SSL_CERTS,
@@ -20,6 +22,7 @@ llm_max = GigaChat(
     model="GigaChat-2-Max",
     verify_ssl_certs=VERIFY_SSL_CERTS,
     scope=GIGACHAT_SCOPE,
+    timeout=GIGACHAT_TIMEOUT
 )
 
 REFINE_PROMPT_TEMPLATE = '''
@@ -184,19 +187,20 @@ def refine_priority(email):
         raw_json = json.dumps(email, ensure_ascii=False, indent=2)
     )
     
-    try:
-        
-        response = llm_max.invoke([HumanMessage(content=prompt)])
-        result = json.loads(response.content)
-        
-        email.update(result)
-        
-        return email
-        
-    except Exception as e:
-        
-        print(f"Ошибка GigaChat: {e}")
-        return fallback_refine(email)
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = llm_max.invoke([HumanMessage(content=prompt)])
+            result = json.loads(response.content)
+            email.update(result)
+            return email
+        except Exception as e:
+            print(f"   Попытка {attempt + 1}/{max_retries} не удалась: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(5)  # пауза 5 секунд перед повтором
+            else:
+                print(f"   Все попытки исчерпаны. Фолбэк на правила.")
+                return fallback_refine(email)
 
 def fallback_refine(email):
     """Делаем проверку вручную если ошибка GigaChat"""

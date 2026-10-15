@@ -5,6 +5,7 @@ from langchain_core.messages import HumanMessage
 
 from src.config import (
     GIGACHAT_CREDENTIALS,
+    GIGACHAT_TIMEOUT,
     GIGACHAT_MODEL,
     GIGACHAT_SCOPE,
     VERIFY_SSL_CERTS,
@@ -17,6 +18,7 @@ llm = GigaChat(
     model=GIGACHAT_MODEL,
     verify_ssl_certs=VERIFY_SSL_CERTS,
     scope=GIGACHAT_SCOPE,
+    timeout=GIGACHAT_TIMEOUT
 )
 
 INJECTION_PATTERNS = [

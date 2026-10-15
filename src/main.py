@@ -54,7 +54,14 @@ def run_pipeline(test_files=None, suffix=""):
 def main():
     """Парсит флаги и запускает пайплайн."""
     
-    parser = argparse.ArgumentParser(description="Обработка обращений в поддержку")
+    parser = argparse.ArgumentParser(
+        description="Обработка обращений в поддержку интернет-магазина"
+    )
+    parser.add_argument(
+        "--agent",
+        action="store_true",
+        help="Использовать агентный подход (GigaChat-2-Max)"
+    )
     parser.add_argument(
         "--test",
         nargs="+",
@@ -65,10 +72,14 @@ def main():
         default="",
         help="Суффикс для имён файлов (например: --suffix _test)"
     )
+    
     args = parser.parse_args()
     
-    run_pipeline(test_files=args.test, suffix=args.suffix)
-
+    if args.agent:
+        from src.agent import run_agent
+        run_agent()
+    else:
+        run_pipeline(test_files=args.test, suffix=args.suffix)
 
 if __name__ == "__main__":
     main()
