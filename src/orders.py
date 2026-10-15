@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from src.config import CURRENT_DATE
 
 def load_orders(orders_path = "data/orders.json"):
     '''Загружает заказы из orders.json и создает список'''
@@ -23,7 +24,7 @@ def calculate_overdue(expected_delivery):
         return 0
     
     expected = datetime.strptime(expected_delivery, '%Y-%m-%d').date()
-    today = datetime(2026, 10, 12).date()
+    today = datetime.strptime(CURRENT_DATE, "%Y-%m-%d").date()
 
     if today > expected:
         return (today - expected).days
@@ -39,15 +40,29 @@ def enrich(email, orders):
         email["expected_delivery"] = None
         email["delivered_at"] = None
         email["days_overdue"] = 0
+        email["total"] = None
+        email["tracking_stale_days"] = None
+        email["payment_status"] = None
+        email["payment_reserve_until"] = None
+        email["refund_status"] = None
+        email["refund_pending_days"] = None
+        email["items"] = []
         return email
     
     order = find_order(orders, order_id)
     
     if not order:
-        email['order_status'] = 'не найден'
+        email["order_status"] = "не найден"
         email["expected_delivery"] = None
         email["delivered_at"] = None
         email["days_overdue"] = 0
+        email["total"] = None
+        email["tracking_stale_days"] = None
+        email["payment_status"] = None
+        email["payment_reserve_until"] = None
+        email["refund_status"] = None
+        email["refund_pending_days"] = None
+        email["items"] = []
         return email
     
     email['order_status'] = order.get('status')
@@ -59,6 +74,35 @@ def enrich(email, orders):
     else:
         email["days_overdue"] = calculate_overdue(order.get("expected_delivery"))
     
+    email["total"] = order.get("total")
+    
+    tracking = order.get("tracking", {})
+    if tracking.get("last_update"):
+        last_update = datetime.strptime(tracking["last_update"], "%Y-%m-%d").date()
+        today = datetime.strptime(CURRENT_DATE, "%Y-%m-%d").date()
+        email["tracking_stale_days"] = (today - last_update).days
+    else:
+        email["tracking_stale_days"] = None
+    
+    
+    payment = order.get("payment", {})
+    email["payment_status"] = payment.get("status")
+    email["payment_reserve_until"] = payment.get("reserve_until")
+    
+    
+    refund = order.get("refund", {})
+    email["refund_status"] = refund.get("status")
+    
+    if refund.get("initiated_at"):
+        initiated = datetime.strptime(refund["initiated_at"], "%Y-%m-%d").date()
+        today = datetime.strptime(CURRENT_DATE, "%Y-%m-%d").date()
+        email["refund_pending_days"] = (today - initiated).days
+    else:
+        email["refund_pending_days"] = None
+    
+    # Товары
+    email["items"] = order.get("items", [])
+    
     return email
 
 
@@ -68,4 +112,6 @@ if __name__ == "__main__":
     
     test_email = {"filename": "001.txt", "order_id_normalized": "48213"}
     enriched = enrich(test_email, orders)
-    print(enriched)
+    
+    from pprint import pprint
+    pprint(enriched)

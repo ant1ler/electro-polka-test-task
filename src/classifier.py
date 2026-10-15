@@ -19,6 +19,31 @@ llm = GigaChat(
     scope=GIGACHAT_SCOPE,
 )
 
+INJECTION_PATTERNS = [
+    "[system note",
+    "ignore previous",
+    "ignore all",
+    "assistant:",
+    "set urgency",
+    "set category",
+    "set priority",
+    "как ии",
+    "ты должен",
+    "instructions:",
+    "system prompt",
+    "new instructions",
+    "override",
+]
+
+def check_injection(text):
+    """Проверяет, есть ли в тексте паттерны инъекций. Возвращает список найденных паттернов."""
+    found = []
+    text_lower = text.lower()
+    for pattern in INJECTION_PATTERNS:
+        if pattern in text_lower:
+            found.append(pattern)
+    return found
+
 PROMPT_TEMPLATE = '''
 Ты - профессиональный классификатор обращений пользователей интернет-магазина.
 Твоя задача - разобрать письмо клиента, понять что там написано и вернуть структурированный .json-файл.
@@ -150,6 +175,10 @@ PROMPT_TEMPLATE = '''
 
 def classify(email_text, filename):
     '''Классификация письма с помощью GigaChat'''
+    
+    injections = check_injection(email_text)
+    if injections:
+        print(f"Возможная инъекция в {filename}: {injections}")
     
     prompt = PROMPT_TEMPLATE.format(filename = filename, email_text = email_text)
     

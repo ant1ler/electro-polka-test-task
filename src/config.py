@@ -10,6 +10,9 @@ INBOX_DIR = BASE_DIR / "data" / "inbox"
 ORDERS_FILE = BASE_DIR / "data" / "orders.json"
 OUTPUT_DIR = BASE_DIR / "output"
 
+# Текущая для задания дата
+CURRENT_DATE = "2026-10-12"
+
 # Данные для классификации Гигачатом
 DEPARTMENTS = ["logistics", "finance", "warranty", "tech", "manual"]
 DEPARTMENTS_RU = {

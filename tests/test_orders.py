@@ -90,3 +90,81 @@ def test_enrich_order_not_found():
     assert enriched["order_status"] == "не найден"
     assert enriched["days_overdue"] == 0
     print("Заказ не найден — пометка 'не найден'")
+
+def test_enrich_total():
+    """total добавляется из заказа."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "001.txt", "order_id_normalized": "48213"}
+    enriched = enrich(email, orders)
+    assert enriched["total"] == 11580
+    print(f"total: {enriched['total']}")
+
+
+def test_enrich_tracking_stale():
+    """tracking_stale_days считается правильно."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "001.txt", "order_id_normalized": "48213"}
+    enriched = enrich(email, orders)
+    assert enriched["tracking_stale_days"] == 8
+    print(f"tracking_stale_days: {enriched['tracking_stale_days']}")
+
+
+def test_enrich_payment():
+    """payment_status и payment_reserve_until добавляются."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "016.txt", "order_id_normalized": "48244"}
+    enriched = enrich(email, orders)
+    assert enriched["payment_status"] == "pending"
+    assert enriched["payment_reserve_until"] == "2026-10-13"
+    print(f"payment: {enriched['payment_status']}, резерв: {enriched['payment_reserve_until']}")
+
+
+def test_enrich_refund():
+    """refund_status и refund_pending_days добавляются."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "017.txt", "order_id_normalized": "48222"}
+    enriched = enrich(email, orders)
+    assert enriched["refund_status"] == "processing"
+    assert enriched["refund_pending_days"] == 22
+    print(f"refund: {enriched['refund_status']}, дней: {enriched['refund_pending_days']}")
+
+
+def test_enrich_items():
+    """items добавляется из заказа."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "001.txt", "order_id_normalized": "48213"}
+    enriched = enrich(email, orders)
+    assert len(enriched["items"]) > 0
+    assert enriched["items"][0]["name"] == "Фен Aero Style"
+    print(f"items: {len(enriched['items'])} товаров")
+
+
+def test_enrich_no_order_id_new_fields():
+    """Письмо без номера — все новые поля None."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "004.txt", "order_id_normalized": None}
+    enriched = enrich(email, orders)
+    assert enriched["total"] is None
+    assert enriched["payment_status"] is None
+    assert enriched["refund_status"] is None
+    assert enriched["tracking_stale_days"] is None
+    assert enriched["items"] == []
+    print("Письмо без номера — новые поля None")
+
+
+def test_enrich_order_not_found_new_fields():
+    """Заказ не найден — все новые поля None."""
+    
+    orders = load_orders("data/orders.json")
+    email = {"file": "014.txt", "order_id_normalized": "99999"}
+    enriched = enrich(email, orders)
+    assert enriched["total"] is None
+    assert enriched["payment_status"] is None
+    assert enriched["refund_status"] is None
+    print("Заказ не найден — новые поля None")
